@@ -33,6 +33,11 @@ function getAccount(accountName) {
   return matchedAccount;
 }
 
-createAccount({
-  name: "Facebook", username: "randomname", password: "Password!"
-});
+// createAccount({
+//   name: "Facebook", username: "randomname", password: "Password!"
+// });
+
+
+//comment out createAccount block and test if account was persisted
+var facebookAccount = getAccount('Facebook');
+console.log(facebookAccount);
