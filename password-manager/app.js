@@ -12,8 +12,10 @@ function createAccount(account) {
   //if returned item is undefined, set it to an empty array
   if(typeof accounts === "undefined") {
     accounts = [];
-    accounts.push(account);
   }
+
+  accounts.push(account);
+  storage.setItemSync("accounts", accounts);
 
   return account;
 }
