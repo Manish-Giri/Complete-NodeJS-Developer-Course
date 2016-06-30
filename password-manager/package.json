@@ -10,6 +10,7 @@
   "author": "Manish Giri",
   "license": "ISC",
   "dependencies": {
-    "node-persist": "0.0.6"
+    "node-persist": "0.0.6",
+    "yargs": "^4.7.1"
   }
 }
