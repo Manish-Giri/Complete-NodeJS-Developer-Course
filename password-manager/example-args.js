@@ -6,7 +6,11 @@ console.log(argv);
 //     console.log("Hello World");
 // }
 
-if(command === 'hello' && typeof argv.name !== 'undefined') {
+if(command === 'hello' && typeof argv.name !== 'undefined' && typeof argv.lastname !== 'undefined') {
+    console.log("Hello, " + argv.name + " " + argv.lastname + "!");
+}
+
+else if(command === 'hello' && typeof argv.name !== 'undefined') {
     console.log("Hello, " + argv.name + "!");
 }
 
