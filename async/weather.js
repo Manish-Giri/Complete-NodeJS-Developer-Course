@@ -14,11 +14,12 @@ function weather() {
             console.log("Unable to fetch IP location");
         }
         else {
-            console.log(JSON.stringify(body, null, 4));
+            //console.log(JSON.stringify(body, null, 4));
             var coords = body.loc.split(",");
             var lat = coords[0];
             var lon = coords[1];
-            console.log(lat, lon);
+            var city = body.city;
+            //console.log(lat, lon);
             var url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=metric&appid=ae0acb60e8db4952e081c2fb470a1b23";
 
             request({
@@ -31,7 +32,8 @@ function weather() {
                 }
                 else {
 
-                    console.log(JSON.stringify(body, null, 4));
+                    //console.log(JSON.stringify(body, null, 4));
+                    console.log("It's " + body.main.temp + " degrees Celsius in " + city);
                 }
             });
 
