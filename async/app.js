@@ -13,10 +13,20 @@ var argv = require('yargs').option("location", {
 }).help("help").argv;
 
 if(typeof argv.l === "string" && argv.l.length > 0) {
-    //user has entered specific location
-    //call weather with this location
+    //user has entered specific location - call weather with this location
     weather(argv.l);
 }
 
-//get the weather
-//weather();
+else {
+    //call weather with user's default location
+    //var lat,lon,city;
+    location(function (result) {
+        var coords = result.loc.split(",");
+        var lat = coords[0];
+        var lon = coords[1];
+        var city = result.city;
+        console.log(city);
+        weather({lat, lon, city});
+    });
+}
+
