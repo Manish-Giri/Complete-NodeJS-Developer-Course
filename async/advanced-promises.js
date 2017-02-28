@@ -1,6 +1,7 @@
 /**
  * Created by manishgiri on 2/26/17.
  */
+/*
 function doWork(shouldFail) {
     return new Promise(function (resolve, reject) {
         if(typeof shouldFail === 'boolean' && shouldFail === true) {
@@ -30,4 +31,25 @@ doWork().then(function () {
     console.log(err);
 }).catch(function () {
     console.log("All failed!");
+})
+
+*/
+
+
+function getLocation() {
+    return new Promise(function (resolve, reject) {
+        resolve("Philadephia");
+    });
+}
+
+function getWeather(location) {
+    return new Promise(function (resolve, reject) {
+        resolve("It's 78 degrees in " + location);
+    });
+}
+
+getLocation().then(function (location) {
+    return getWeather(location)
+}).then(function (currWeather) {
+    console.log(currWeather);
 })
