@@ -18,7 +18,7 @@ function weather(location) {
             var lat = location.lat;
             var lon = location.lon;
             var city = location.city;
-            console.log(lat);
+            //console.log(lat);
             var url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=metric&appid=ae0acb60e8db4952e081c2fb470a1b23";
             request({
                 url: url,
