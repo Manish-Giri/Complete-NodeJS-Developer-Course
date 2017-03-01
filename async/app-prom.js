@@ -29,12 +29,17 @@ if(typeof argv.l === "string" && argv.l.length > 0) {
 else {
     //call weather with user's default location
     //var lat,lon,city;
-    location(function (result) {
+    location().then(function (result) {
         var coords = result.loc.split(",");
         var lat = coords[0];
         var lon = coords[1];
         var city = result.city;
-        console.log(city);
-        weather({lat, lon, city});
+        return weather({lat, lon, city});
+    }).then(function (res) {
+        console.log(`It's ${res.main.temp} degrees Celsius in ${res.name}`);
+        //console.log(res);
+    }).catch(function (err) {
+        console.log(err);
     });
+
 }
