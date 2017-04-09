@@ -33,7 +33,7 @@ app.get("/about", middleware.requireAuthentication, function (req, res) {
 });
 
 //console.log(__dirname);
-var port = 3000;
+var port = process.env.PORT || 3000;
 
 app.use(express.static(__dirname +"/public"));
 
