@@ -51,7 +51,6 @@ app.get('/todos/:id', function (req, res) {
     else {
         res.json(todoItem);
     }
-    //res.send("Asking for todo with ID " + req.params.id);
 })
 
 app.get('/', function (req, res) {
