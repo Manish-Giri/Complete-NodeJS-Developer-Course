@@ -3,7 +3,9 @@
  */
 var express = require('express');
 var app = express();
+var bodyParser = require('body-parser');
 var port = process.env.PORT || 3000;
+var todoNextID = 1;
 
 //TODOS - collection of todoitems - todo is the model
 var todos = [
@@ -24,6 +26,8 @@ var todos = [
     }
 
 ]
+
+app.use(bodyParser.json());
 
 /**
  * GET REQUESTS -
@@ -55,6 +59,16 @@ app.get('/todos/:id', function (req, res) {
 
 app.get('/', function (req, res) {
     res.send("Todo API Root");
+});
+
+
+/**
+ * POST todos to /todos
+ */
+app.post('/todos', function (req, res) {
+    var body = req.body;
+    console.log("description = " + body.description);
+    res.json(body);
 });
 
 app.listen(port, function () {
