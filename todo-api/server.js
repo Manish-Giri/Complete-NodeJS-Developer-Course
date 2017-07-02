@@ -112,6 +112,54 @@ app.delete('/todos/:id', function (req, res) {
 
 });
 
+/**
+ * UPDATE a todo with an ID
+ */
+
+app.put('/todos/:id', function (req, res) {
+    // filter unnecessary fields from request
+    let body = _.pick(req.body, "description", "completed");
+    let toUpdateID = parseInt(req.params.id);
+
+    // get todo ITEM to be updated
+    // NOTE : Does this return a reference to the matched item from the todos array?
+    let matchedTodo = _.findWhere(todos, {id: toUpdateID});
+
+    // object to store validated fields
+    var validatedAttributes = {};
+
+    // if no matched todo
+    if(!matchedTodo) {
+        // using RETURN ensures following code won't execute
+        // 404 = not found, 400 = bad request
+        return res.status(404).send();
+    }
+    // validation for passed in body.completed property
+    if(body.hasOwnProperty("completed") && _.isBoolean(body.completed)) {
+        validatedAttributes.completed = body.completed;
+    }
+    else if(body.hasOwnProperty("completed")) {
+        // completed property exists but is not boolean
+        return res.status(400).send();
+    }
+
+
+    // validation for passed in body.description property
+    if(body.hasOwnProperty("description") && _.isString(body.description)) {
+        validatedAttributes.description = body.description;
+    }
+    else if(body.hasOwnProperty("description")) {
+        // completed property exists but is not boolean
+        return res.status(400).send();
+    }
+
+    // use _.extend to get updated todo - this will update matchedTodo in place too
+    _.extend(matchedTodo, validatedAttributes);
+
+    res.json(matchedTodo);
+});
+
+
 app.listen(port, function () {
     console.log("Express listening on port " + port);
 })
