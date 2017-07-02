@@ -45,22 +45,8 @@ app.get('/todos', function (req, res) {
 app.get('/todos/:id', function (req, res) {
     var todoID = parseInt(req.params.id);
 
-    // var todoItem = {};
-
-    // refactor to use underscore
-    /*
-    todos.forEach(function (todo) {
-        if(todoID === todo.id) {
-            todoItem = todo;
-        }
-    })
-    */
-
     // use Underscore's findWhere
     var todoItem = _.findWhere(todos, {id: todoID});
-
-    // var isObjEmpty = !Object.keys(todoItem).length;
-
     if(!todoItem) {
         res.status(404).send();
     }
@@ -80,11 +66,16 @@ app.get('/', function (req, res) {
 app.post('/todos', function (req, res) {
     var body = req.body;
 
-    if(!_.isBoolean(body.completed) || !_.isString(body.description) || !body.description.trim.length) {
+    if(!_.isBoolean(body.completed) || !_.isString(body.description) || !body.description.trim().length) {
         // bad data was sent
-        
         return res.status(400).send();
     }
+
+    // use .pick() to filter out whitelist data - remove unnecessary fields
+    body = _.pick(body, "description", "completed");
+
+    // use trim to remove spaces from description
+    body.description = body.description.trim();
 
     //add ID field
     body.id = todoNextID++;
@@ -92,8 +83,33 @@ app.post('/todos', function (req, res) {
     //push body into array
     todos.push(body);
 
-    console.log("description = " + body.toString());
+    // console.log("description = " + body.toString());
     res.json(body);
+});
+
+/**
+ * DELETE a todo with ID
+ */
+
+app.delete('/todos/:id', function (req, res) {
+    let toDeleteID = parseInt(req.params.id);
+
+    // get todo ITEM to be removed
+    // let deletedTodo = todos[toDeleteID];
+    let matchedTodo = _.findWhere(todos, {id: toDeleteID});
+
+    // if ID not found
+    if(!matchedTodo) {
+        //send error response
+        res.status(404).json({"error": "No TODO found with that ID"});
+    }
+
+    else {
+        // use .without() from underscore to return filtered todo array
+        todos = _.without(todos, matchedTodo);
+        res.json(matchedTodo);
+    }
+
 });
 
 app.listen(port, function () {
