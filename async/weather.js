@@ -18,12 +18,12 @@ function weather(location) {
         request({
            url: url,
             json: true
-        }, function (error, res, result1) {
+        }, function (error, res, result) {
             if (error) {
                 console.log("Unable to fetch weather");
             }
             else {
-                console.log("It's " + result1.main.temp + " degrees Celsius in " + city);
+                console.log("It's " + result.main.temp + " degrees Celsius in " + city);
             }
 
         })
@@ -32,12 +32,12 @@ function weather(location) {
         //a city is passed in
         var encodedLocation = encodeURI(location);
         url = "http://api.openweathermap.org/data/2.5/weather?q="+encodedLocation+"&units=metric&appid=ae0acb60e8db4952e081c2fb470a1b23";
-        request({url: url, json: true}, function (error, res, result2) {
+        request({url: url, json: true}, function (error, res, result) {
             if (error) {
                 console.log("Unable to fetch IP location");
             }
             else {
-                console.log("It's " + result2.main.temp + " degrees Celsius in " + location);
+                console.log("It's " + result.main.temp + " degrees Celsius in " + location);
 
             }
 
