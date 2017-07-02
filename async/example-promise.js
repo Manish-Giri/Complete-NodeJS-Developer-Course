@@ -34,3 +34,26 @@ doPromiseWork(2).then(function(result){
     //result += 1;
 })
 
+function booleanWork(shouldFail) {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            if(shouldFail) {
+                reject("Promise Rejected.");
+            }
+            else {
+                resolve("Promise Resolved.");
+            }
+        }, 2000)
+    });
+}
+
+booleanWork().then(function (message) {
+    console.log(message);
+    // return another promise
+    return booleanWork(true)
+}).then(function (message) {
+    console.log("this won't print");
+}).catch(function (error) {
+    // this will execute because promise was rejected 2nd time
+    console.log(error);
+})
