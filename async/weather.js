@@ -10,9 +10,11 @@ function weather(location) {
     //location is passing
     // an explicit city
     if(typeof location !== "string") {
-        var lat = location.lat;
-        var lon = location.lon;
-        var city = location.city;
+        // var lat = location.lat;
+        // var lon = location.lon;
+        // var city = location.city;
+        // Use object destructuring instead
+        var {lat, lon, city} = location;
         console.log(lat);
         var url = "http://api.openweathermap.org/data/2.5/weather?lat="+lat+"&lon="+lon+"&units=metric&appid=ae0acb60e8db4952e081c2fb470a1b23";
         request({
