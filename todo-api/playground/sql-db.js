@@ -10,22 +10,51 @@ const sequelize = new Sequelize(undefined, undefined, undefined, {
 
 let Todo = sequelize.define('todo', {
     description: {
-        type: Sequelize.STRING
+        type: Sequelize.STRING,
+        allowNull: false,
+        validate: {
+            len: [1, 20]
+        }
     },
     completed: {
-        type: Sequelize.BOOLEAN
+        type: Sequelize.BOOLEAN,
+        allowNull: false,
+        defaultValue: false
     }
 });
 
-sequelize.sync().then(function () {
+sequelize.sync({force: true}).then(function () {
     console.log("Everything is synced.");
 
     Todo.create({
-        description: "Walk the dog",
-        completed: false
+        description: "Take out trash",
+        // completed: false
     }).then(function (todo) {
-        console.log("Finished");
-        console.log(todo);
+        //console.log("Finished");
+        // console.log(todo);
+        return Todo.create({
+            description: "Clean Office"
+        });
+    }).then(function () {
+        // return Todo.findById(1)
+        return Todo.findAll({
+            // completed: false
+            where: {
+                description: {
+                    $like: '%office%'
+                }
+            }
+        })
+    }).then(function (todos) {
+          if(todos) {
+              // console.log(todo.toJSON());
+              todos.forEach(todo => console.log(todo.toJSON()));
+          }
+          else {
+              console.log("No Todo found.");
+          }
+    }).catch(function (error) {
+        console.log(error);
     })
 });
 
