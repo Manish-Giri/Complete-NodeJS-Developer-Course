@@ -42,7 +42,10 @@ app.get('/todos', function (req, res) {
     // a query param is all K-V pairs after the ?, like GET /todos?completed=true
     // get the query params obj
     let queryParams = req.query;
+    // todos that will be filtered
     let filteredTodos = todos;
+
+    // a search param will look like GET /todos?completed=true&q=work, search for "work"
 
     // check if completed was used in query params
     if(queryParams.hasOwnProperty("completed")) {
@@ -56,6 +59,17 @@ app.get('/todos', function (req, res) {
             filteredTodos = _.where(filteredTodos, {completed: false});
         }
     }
+
+    // use filter and indexOf to return todos whose description contains the searched text
+    if(queryParams.hasOwnProperty("q") && queryParams.q.length > 0) {
+        let searchItem = queryParams.q.toLowerCase();
+
+        filteredTodos = _.filter(filteredTodos, function (todo) {
+            return todo.description.toLowerCase().indexOf(searchItem) >= 0;
+        })
+
+    }
+
     // return filtered todos
     res.json(filteredTodos);
 });
