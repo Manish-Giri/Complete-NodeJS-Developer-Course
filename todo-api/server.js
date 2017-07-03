@@ -39,7 +39,25 @@ app.use(bodyParser.json());
  */
 
 app.get('/todos', function (req, res) {
-    res.json(todos);
+    // a query param is all K-V pairs after the ?, like GET /todos?completed=true
+    // get the query params obj
+    let queryParams = req.query;
+    let filteredTodos = todos;
+
+    // check if completed was used in query params
+    if(queryParams.hasOwnProperty("completed")) {
+        // if value was true (note - string, not boolean)
+        if(queryParams.completed === "true") {
+            // return all todos with completed set to true
+            filteredTodos = _.where(filteredTodos, {completed: true});
+        }
+        else if (queryParams.completed === "false") {
+            // return all todos with completed to false
+            filteredTodos = _.where(filteredTodos, {completed: false});
+        }
+    }
+    // return filtered todos
+    res.json(filteredTodos);
 });
 
 app.get('/todos/:id', function (req, res) {
