@@ -8,7 +8,9 @@ const sequelize = new Sequelize(undefined, undefined, undefined, {
 });
 
 let db = {};
-
+db.todo = sequelize.import(__dirname + '/models/todo.js');
+db.sequelize = sequelize;
+db.Sequelize = Sequelize;
 
 // export the db object
 module.exports = db;
