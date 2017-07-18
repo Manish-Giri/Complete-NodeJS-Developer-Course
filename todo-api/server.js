@@ -48,18 +48,18 @@ app.get('/todos', function (req, res) {
     res.json(filteredTodos);
 });
 
+/**
+ * GET REQUEST -
+ * GET /todos/:id
+ */
 app.get('/todos/:id', function (req, res) {
     var todoID = parseInt(req.params.id);
-
-    // use Underscore's findWhere
-    var todoItem = _.findWhere(todos, {
-        id: todoID
-    });
-    if (!todoItem) {
-        res.status(404).send();
-    } else {
-        res.json(todoItem);
-    }
+    db.todo.findById(todoID).then(todo => {
+        todo ? res.json(todo) : res.status(404).send();
+    }, e => {
+        // problem with server
+        res.status(500).send();
+    })
 })
 
 app.get('/', function (req, res) {
