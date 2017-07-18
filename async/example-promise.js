@@ -22,17 +22,17 @@ function doPromiseWork(data) {
 //}
 );*/
 
-doPromiseWork(2).then(function(result){
-
-    console.log(result);
-    return result += 1;
-}).then(function(result){
-    console.log(result);
-    return result += 2;
-}).then(function(result){
-    console.log(result);
-    //result += 1;
-})
+// doPromiseWork(2).then(function(result){
+//
+//     console.log(result);
+//     return result += 1;
+// }).then(function(result){
+//     console.log(result);
+//     return result += 2;
+// }).then(function(result){
+//     console.log(result);
+//     //result += 1;
+// })
 
 function booleanWork(shouldFail) {
     return new Promise((resolve, reject) => {
@@ -52,7 +52,7 @@ booleanWork().then(function (message) {
     // return another promise
     return booleanWork(true)
 }).then(function (message) {
-    console.log("this won't print");
+    console.log(message);
 }).catch(function (error) {
     // this will execute because promise was rejected 2nd time
     console.log(error);
