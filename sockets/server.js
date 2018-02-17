@@ -8,7 +8,22 @@ const io = require('socket.io')(http);
 
 app.use(express.static(__dirname + '/public'));
 
-io.on('connection', () => console.log("User connected via Socket.io!"));
+io.on('connection', (socket) => {
+    console.log("User connected via Socket.io!");
+
+    // emit a custom message on connection from a socket (browser)
+    socket.emit('message', {
+        text: "Welcome to the chat application!"
+    });
+
+    // listen for custom message from one socket and broadast to all other sockets
+    socket.on('message', message => {
+        console.log(`Message received: ${message.text}`);
+        // broadcast
+        socket.broadcast.emit('message', message);
+    });
+
+});
 
 
 
