@@ -10,7 +10,7 @@ app.use(express.static(__dirname + '/public'));
 
 io.on('connection', (socket) => {
     console.log("User connected via Socket.io!");
-
+    console.log("------");
     // emit a custom message on connection from a socket (browser)
     socket.emit('message', {
         text: "Welcome to the chat application!"
