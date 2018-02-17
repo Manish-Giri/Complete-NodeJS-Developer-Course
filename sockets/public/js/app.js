@@ -5,6 +5,9 @@ socket.on('connect', () => console.log("Connected to socket.io server"));
 
 socket.on('message', (message) => {
     console.log(`New message received: ${message.text}`);
+
+    // display message received from server on screen
+    $(".messages").append(`<p>${message.text}</p>`);
 });
 
 // handle form submission

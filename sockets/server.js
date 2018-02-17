@@ -19,8 +19,10 @@ io.on('connection', (socket) => {
     // listen for custom message from one socket and broadast to all other sockets
     socket.on('message', message => {
         console.log(`Message received: ${message.text}`);
-        // broadcast
+
+        // broadcast to everyone but sender
         socket.broadcast.emit('message', message);
+        // NOTE: use io.emit() for sending to sender too
     });
 
 });
