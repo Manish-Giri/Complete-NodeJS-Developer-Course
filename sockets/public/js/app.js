@@ -21,6 +21,10 @@ socket.on('connect', () => {
 socket.on('message', (message) => {
     console.log(`New message received: ${message.text}`);
 
+    /*
+    comment for testing
+
+
     // convert timestamp received from server to moment object
     let timestampMoment = moment.utc(message.timestamp);
     // create a header - name + date
@@ -33,6 +37,24 @@ socket.on('message', (message) => {
     $message.append(`<p class="text-info">${messageInfo}</p>`);
     $message.append(`<p>${message.text}</p>`);
     $(".messages").append($message);
+    */
+
+    // convert timestamp received from server to moment object
+    let timestampMoment = moment.utc(message.timestamp);
+    // create a header - name + date
+    let user = message.name;
+    let time = `<span class="label label-default pull-right">${timestampMoment.local().format('h:mm a')}</span>`;
+
+    let $message = $("<li class='list-group-item'></li>");
+
+    // display message received from server on screen
+    // attach timestamp received from server as local time
+    $message.append(`<p class="text-info lead">${user}</p>`);
+    $message.append(`<p>${message.text} ${time}</p>`);
+    $(".messages").append($message);
+
+
+
 });
 
 // handle form submission

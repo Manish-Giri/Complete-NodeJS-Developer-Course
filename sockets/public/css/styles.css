@@ -5,6 +5,10 @@
     align-items: center;
 }
 
-h1 {
+.messages p {
+    margin: 6px 0;
+}
 
+#chat-well {
+    margin-top: 40px;
 }
