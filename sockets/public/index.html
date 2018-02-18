@@ -3,23 +3,35 @@
 <head>
     <meta charset="UTF-8">
     <title>Chat App</title>
+    <link href="css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
-<h1>Join Chat</h1>
 
+<div class="container">
+    <div class="row">
+        <div class="col-md-4 col-md-offset-4">
+            <h2>Welcome to the chat</h2>
+            <form action="/chat.html" id="message-form">
+                <div class="form-group">
+                    <label>Select a name</label>
+                    <input type="text" name="name" placeholder="Enter your name" class="form-control">
+                </div>
 
-<!--<div class="messages">-->
-<!--</div>-->
+                <div class="form-group">
+                    <label>Enter a chat room</label>
+                    <input type="text" name="room" placeholder="Enter chat room name" class="form-control">
+                </div>
 
-<form action="/chat.html" id="message-form">
-    <label>Select a name</label>
-    <input type="text" name="name" placeholder="Enter name">
-    <br>
-    <label>Enter a chat room</label>
-    <input type="text" name="room" placeholder="Enter name">
-    <br>
-    <input type="submit" value="Join Chat">
-</form>
+                <div class="form-group">
+                    <input type="submit" value="Join Chat" class="btn btn-primary">
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+</div>
+
 
 </body>
 </html>
