@@ -2,22 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Socket.io</title>
+    <title>Chat App</title>
 </head>
 <body>
-<h2>Socket App</h2>
+<h1>Join Chat</h1>
 
-<div class="messages">
-</div>
 
-<form action="" id="message-form">
-    <input type="text" name="message">
-    <input type="submit">
+<!--<div class="messages">-->
+<!--</div>-->
+
+<form action="/chat.html" id="message-form">
+    <label>Choose a name</label>
+    <input type="text" name="name" placeholder="Enter name">
+    <br>
+    <input type="submit" value="Join Chat">
 </form>
 
-<script src="js/jquery-3.3.1.min.js"></script>
-<script src="js/moment.js"></script>
-<script src="js/socket.io.js"></script>
-<script type="text/javascript" src="js/app.js"></script>
 </body>
 </html>

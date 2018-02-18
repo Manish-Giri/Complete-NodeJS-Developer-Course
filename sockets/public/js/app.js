@@ -1,6 +1,9 @@
 const socket = io();
+const name = getQueryVariable('name') || 'Anonymous';
+const room = getQueryVariable('room');
 //console.log(socket);
 
+console.log(`${name} wants to join ${room}`);
 socket.on('connect', () => console.log("Connected to socket.io server"));
 
 
@@ -8,11 +11,14 @@ socket.on('connect', () => console.log("Connected to socket.io server"));
 socket.on('message', (message) => {
     console.log(`New message received: ${message.text}`);
 
+    // convert timestamp received from server to moment object
     let timestampMoment = moment.utc(message.timestamp);
+    // create a header - name + date
+    let messageInfo = `${message.name} ${timestampMoment.local().format('h:mm a')}`;
 
     // display message received from server on screen
     // attach timestamp received from server as local time
-    $(".messages").append(`<p><strong>${timestampMoment.local().format('h:mm a')}</strong>: ${message.text}</p>`);
+    $(".messages").append(`<p><strong>${messageInfo}</strong>: ${message.text}</p>`);
 });
 
 // handle form submission
@@ -24,6 +30,7 @@ $form.on('submit', (e) => {
 
 
    socket.emit('message', {
+       name: name,
        text: $formInp.val()
    });
 

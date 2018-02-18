@@ -17,6 +17,7 @@ io.on('connection', (socket) => {
     // FIRST system message
 
     socket.emit('message', {
+        name: "The Matrix",
         text: 'Welcome to the chat application!',
         at: moment().valueOf()
     });
