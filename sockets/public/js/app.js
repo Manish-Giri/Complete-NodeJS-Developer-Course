@@ -26,9 +26,13 @@ socket.on('message', (message) => {
     // create a header - name + date
     let messageInfo = `${message.name} ${timestampMoment.local().format('h:mm a')}`;
 
+    let $message = $("<li class='list-group-item'></li>");
+
     // display message received from server on screen
     // attach timestamp received from server as local time
-    $(".messages").append(`<p><strong>${messageInfo}</strong>: ${message.text}</p>`);
+    $message.append(`<p class="text-info">${messageInfo}</p>`);
+    $message.append(`<p>${message.text}</p>`);
+    $(".messages").append($message);
 });
 
 // handle form submission
