@@ -4,7 +4,14 @@ const room = getQueryVariable('room');
 //console.log(socket);
 
 console.log(`${name} wants to join ${room}`);
-socket.on('connect', () => console.log("Connected to socket.io server"));
+socket.on('connect', () => {
+
+    // setup chat room name
+    $(".room-title").html(room);
+
+    console.log("Connected to socket.io server")
+});
+
 
 
 // listen for custom event 'message', passed the message received
