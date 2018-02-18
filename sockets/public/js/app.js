@@ -9,7 +9,10 @@ socket.on('connect', () => {
     // setup chat room name
     $(".room-title").html(room);
 
-    console.log("Connected to socket.io server")
+    console.log("Connected to socket.io server");
+
+    console.log("--- Joining room ---");
+    socket.emit('joinRoom', {name, room});
 });
 
 
